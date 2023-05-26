@@ -1,18 +1,40 @@
+// =============================================================================
+// chickehouse-door-monitor | Main
+// =============================================================================
+
 #include <Arduino.h>
+#include "hardware.h"
+#include "EdgeDetection.h"
+#include "general.h"
+#include "configurations.h"
+#include "state.h"
 
-// put function declarations here:
-int myFunction(int, int);
+void refreshData();
 
-void setup() {
-  // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+//------------------------------------------------------------------------------
+
+void setup()
+{
+  Serial.begin(9600);
 }
 
-void loop() {
-  // put your main code here, to run repeatedly:
+void loop()
+{
+  for (;;)
+  {
+    refreshData();
+
+    State::stateDriver();
+  }
 }
 
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
+//------------------------------------------------------------------------------
+
+void refreshData()
+{
+  General::statusDoorSignal = digitalRead(PIN_DOORSIGNAL);
+  General::statusSwitchMidway = digitalRead(PIN_SWITCH_MIDWAY);
+  General::statusSwitchEnd = digitalRead(PIN_SWITCH_END);
+
+  EdgeDetection::updateEdges();
 }
