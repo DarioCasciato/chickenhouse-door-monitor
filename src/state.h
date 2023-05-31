@@ -13,20 +13,28 @@ namespace State
 {
     enum States
     {
-        st_X,
-        st_XX,
-        st_XXX
+        st_start,
+        st_closed,
+        st_opening,
+        st_open,
+        st_closing
     };
 
     /// @brief State driver function
     void stateDriver();
 
-    /// @brief Handler for the X state
-    void stateX();
+    /// @brief Handler for the Start state
+    void stateStart();
 
-    /// @brief Handler for the XX state
-    void stateXX();
+    /// @brief Handler for the Closed state
+    void stateClosed();
 
-    /// @brief Handler for the XXX state
-    void stateXXX();
+    /// @brief Handler for the Opening state
+    void stateOpening();
+
+    /// @brief Handler for the Open state
+    void stateOpen();
+
+    /// @brief Handler for the Closing state
+    void stateClosing();
 } // namespace State

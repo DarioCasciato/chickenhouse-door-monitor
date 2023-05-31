@@ -3,20 +3,29 @@
 // =============================================================================
 
 #include "state.h"
+#include "Timer.h"
+
+Timer counter;
+
+//------------------------------------------------------------------------------
+
+
 
 //------------------------------------------------------------------------------
 
 namespace State
 {
-    States state = States::st_X;
+    States state = States::st_start;
 
     void stateDriver()
     {
         switch (State::state)
         {
-        case State::st_X: stateX(); break;
-        case State::st_XX: stateXX(); break;
-        case State::st_XXX: stateXXX(); break;
+        case State::st_start: stateStart(); break;
+        case State::st_closed: stateClosed(); break;
+        case State::st_opening: stateOpening(); break;
+        case State::st_open: stateOpen(); break;
+        case State::st_closing: stateClosing(); break;
 
         default:
         goto exception;
@@ -29,17 +38,27 @@ namespace State
             for(;;) {}
     }
 
-    void stateX()
+    void stateStart()
     {
 
     }
 
-    void stateXX()
+    void stateClosed()
     {
 
     }
 
-    void stateXXX()
+    void stateOpening()
+    {
+
+    }
+
+    void stateOpen()
+    {
+
+    }
+
+    void stateClosing()
     {
 
     }
