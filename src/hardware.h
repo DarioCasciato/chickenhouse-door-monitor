@@ -9,7 +9,7 @@
 
 namespace Hardware
 {
-    extern EdgeDetection doorSignal;
+    //extern EdgeDetection doorSignal;
     extern EdgeDetection switchMidway;
     extern EdgeDetection switchEnd;
 } // namespace Hardware

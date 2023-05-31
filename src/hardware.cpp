@@ -7,7 +7,7 @@
 
 namespace Hardware
 {
-    EdgeDetection doorSignal(&General::statusDoorSignal);
+    //EdgeDetection doorSignal(&General::statusDoorSignal);
     EdgeDetection switchMidway(&General::statusSwitchMidway);
     EdgeDetection switchEnd(&General::statusSwitchEnd);
 } // namespace Hardware
