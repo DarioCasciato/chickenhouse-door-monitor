@@ -9,7 +9,9 @@
 
 namespace General
 {
-    uint8_t statusDoorSignal;
+    //Temporary, current solution should work without doorSignal
+    //uint8_t statusDoorSignal;
+
     uint8_t statusSwitchMidway;
     uint8_t statusSwitchEnd;
 } // namespace General

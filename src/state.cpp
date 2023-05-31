@@ -39,7 +39,14 @@ namespace State
 
     void stateStart()
     {
-
+        if(Hardware::switchEnd.getActState())
+        {
+            state = States::st_closed;
+        }
+        else
+        {
+            state = States::st_open;
+        }
     }
 
     void stateClosed()
