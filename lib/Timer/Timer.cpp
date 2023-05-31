@@ -9,6 +9,11 @@ void Timer::start()
     _startTicks = millis();
 }
 
+void Timer::stop()
+{
+    _startTicks = 0;
+}
+
 bool Timer::elapsed(uint32_t ms)
 {
     _delta = millis() - _startTicks;

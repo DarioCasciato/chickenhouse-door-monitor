@@ -11,4 +11,7 @@
 #define PIN_SWITCH_MIDWAY       99
 #define PIN_SWITCH_END          99
 
+#define TIME_OPENING            99
+#define TIME_CLOSING            99
+
 #endif // _CHICKENHOUSE_DOOR_MONITOR_CONFIGURATIONS_
