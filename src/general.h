@@ -12,8 +12,8 @@ namespace General
     //Temporary, current solution should work without doorSignal
     //uint8_t statusDoorSignal;
 
-    uint8_t statusSwitchMidway;
-    uint8_t statusSwitchEnd;
+    extern uint8_t statusSwitchMidway;
+    extern uint8_t statusSwitchEnd;
 } // namespace General
 
 

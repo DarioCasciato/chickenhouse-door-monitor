@@ -17,7 +17,7 @@ public:
     /// @brief Start the timer
     void start();
 
-    /// @brief Stop the timer
+    /// @brief  @brief Stop the timer
     void stop();
 
     /// @brief Check if the specified time has elapsed
