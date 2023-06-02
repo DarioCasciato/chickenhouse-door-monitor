@@ -17,6 +17,9 @@ public:
     /// @brief Start the timer
     void start();
 
+    /// @brief  @brief Stop the timer
+    void stop();
+
     /// @brief Check if the specified time has elapsed
     ///
     /// @param ms The time threshold in milliseconds

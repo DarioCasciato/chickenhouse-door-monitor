@@ -9,7 +9,9 @@
 
 namespace Hardware
 {
+    //Temporary, current solution should work without doorSignal
     //extern EdgeDetection doorSignal;
+
     extern EdgeDetection switchMidway;
     extern EdgeDetection switchEnd;
 } // namespace Hardware
