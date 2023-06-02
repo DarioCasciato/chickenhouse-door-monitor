@@ -43,10 +43,12 @@ namespace State
         if(Hardware::switchEnd.getActState())
         {
             state = States::st_closed;
+            Serial.println("Starting Closed");
         }
         else
         {
             state = States::st_open;
+            Serial.println("Starting Opened");
         }
     }
 
@@ -55,6 +57,7 @@ namespace State
         if(Hardware::switchEnd.getEdgeNeg())
         {
             state = States::st_opening;
+            Serial.println("Door opening");
             counter.start();
         }
     }
@@ -64,6 +67,7 @@ namespace State
         if(Hardware::switchMidway.getEdgePos())
         {
             flag_midwayTriggered = true;
+            Serial.println("midway Sensor triggered");
         }
 
         if(counter.elapsed(TIME_OPENING * 1000))
@@ -71,12 +75,16 @@ namespace State
             if(flag_midwayTriggered && !Hardware::switchEnd.getActState())
             {
                 state = States::st_open;
+                Serial.println("door opened");
             }
             else
             {
                 state = States::st_closed;
+                Serial.println("OPENING FAILED");
                 //! SEND NOTIFICATION (NOT OPENED)
             }
+
+            flag_midwayTriggered = false;
             counter.stop();
         }
     }
@@ -86,6 +94,7 @@ namespace State
         if(Hardware::switchMidway.getEdgePos())
         {
             state = States::st_closing;
+            Serial.println("Door closing");
             counter.start();
         }
     }
@@ -97,10 +106,12 @@ namespace State
             if(Hardware::switchEnd.getActState())
             {
                 state = States::st_closed;
+                Serial.println("door closed");
             }
             else
             {
                 state = States::st_open;
+                Serial.println("CLOSING FAILED");
                 //! SEND NOTIFICATION (NOT CLOSED)
             }
         }
