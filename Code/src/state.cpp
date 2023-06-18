@@ -2,12 +2,16 @@
 // chickehouse-door-monitor | State
 // =============================================================================
 
+#include <ESP8266WiFi.h>
+#include <ESP8266HTTPClient.h>
 #include "state.h"
 #include "hardware.h"
 #include "configurations.h"
 #include "Timer.h"
 
 Timer counter;
+
+void sendNotification();
 
 bool flag_midwayTriggered = false;
 
@@ -50,6 +54,8 @@ namespace State
             state = States::st_open;
             Serial.println("Starting Opened");
         }
+
+        sendNotification();
     }
 
     void stateClosed()
@@ -120,3 +126,22 @@ namespace State
 
 //------------------------------------------------------------------------------
 
+void sendNotification() {
+  HTTPClient http;
+  WiFiClient client;
+
+  // Send the HTTP POST request
+  http.begin(client, api_key);
+  int httpResponseCode = http.POST("");
+
+  // Check the response code
+  if (httpResponseCode == HTTP_CODE_OK) {
+    Serial.println("Notification sent!");
+  } else {
+    Serial.print("Error sending notification. Response code: ");
+    Serial.println(httpResponseCode);
+  }
+
+  // Close the connection
+  http.end();
+}
