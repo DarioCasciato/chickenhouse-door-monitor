@@ -54,8 +54,6 @@ namespace State
             state = States::st_open;
             Serial.println("Starting Opened");
         }
-
-        sendNotification();
     }
 
     void stateClosed()
@@ -88,6 +86,7 @@ namespace State
                 state = States::st_closed;
                 Serial.println("OPENING FAILED");
                 //! SEND NOTIFICATION (NOT OPENED)
+                sendNotification();
             }
 
             flag_midwayTriggered = false;
@@ -119,6 +118,7 @@ namespace State
                 state = States::st_open;
                 Serial.println("CLOSING FAILED");
                 //! SEND NOTIFICATION (NOT CLOSED)
+                sendNotification();
             }
         }
     }
