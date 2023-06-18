@@ -11,7 +11,11 @@
 
 Timer counter;
 
-void sendNotification();
+HTTPClient http;
+WiFiClient client;
+
+void sendNotClosed();
+void sendNotOpened();
 
 bool flag_midwayTriggered = false;
 
@@ -86,7 +90,7 @@ namespace State
                 state = States::st_closed;
                 Serial.println("OPENING FAILED");
                 //! SEND NOTIFICATION (NOT OPENED)
-                sendNotification();
+                sendNotOpened();
             }
 
             flag_midwayTriggered = false;
@@ -118,7 +122,7 @@ namespace State
                 state = States::st_open;
                 Serial.println("CLOSING FAILED");
                 //! SEND NOTIFICATION (NOT CLOSED)
-                sendNotification();
+                sendNotClosed();
             }
         }
     }
@@ -126,17 +130,31 @@ namespace State
 
 //------------------------------------------------------------------------------
 
-void sendNotification() {
-  HTTPClient http;
-  WiFiClient client;
-
+void sendNotClosed() {
   // Send the HTTP POST request
-  http.begin(client, api_key);
+  http.begin(client, request_notClosed);
   int httpResponseCode = http.POST("");
 
   // Check the response code
   if (httpResponseCode == HTTP_CODE_OK) {
-    Serial.println("Notification sent!");
+    Serial.println("Notification sent: Not Closed!");
+  } else {
+    Serial.print("Error sending notification. Response code: ");
+    Serial.println(httpResponseCode);
+  }
+
+  // Close the connection
+  http.end();
+}
+
+void sendNotOpened() {
+  // Send the HTTP POST request
+  http.begin(client, request_notOpened);
+  int httpResponseCode = http.POST("");
+
+  // Check the response code
+  if (httpResponseCode == HTTP_CODE_OK) {
+    Serial.println("Notification sent: Not Opened!");
   } else {
     Serial.print("Error sending notification. Response code: ");
     Serial.println(httpResponseCode);

@@ -18,6 +18,7 @@
 extern const char* ssid;
 extern const char* password;
 extern const char* event_name;
-extern const char* api_key;
+extern const char* request_notClosed;
+extern const char* request_notOpened;
 
 #endif // _CHICKENHOUSE_DOOR_MONITOR_CONFIGURATIONS_
