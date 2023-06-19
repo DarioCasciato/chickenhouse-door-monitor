@@ -12,6 +12,7 @@
 #include "state.h"
 
 void refreshData();
+void WiFiEstablish();
 
 //------------------------------------------------------------------------------
 
@@ -20,13 +21,7 @@ void setup()
   Serial.begin(115200);
   ESP.wdtEnable(WDTO_1S);
 
-  // Wifi Connection
-  WiFi.begin(ssid, password);
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(1000);
-    Serial.println("Connecting to WiFi...");
-  }
-  Serial.println("Connected to WiFi!");
+  WiFiEstablish();
 }
 
 void loop()
@@ -45,8 +40,21 @@ void loop()
 
 void refreshData()
 {
-  General::statusSwitchMidway = digitalRead(PIN_SWITCH_MIDWAY);
-  General::statusSwitchEnd = digitalRead(PIN_SWITCH_END);
+  General::statusSwitchMidway = Hardware::getPort(Hardware::Port::switchMidway);
+  General::statusSwitchEnd = Hardware::getPort(Hardware::Port::switchEnd);
 
   EdgeDetection::updateEdges();
+}
+
+void WiFiEstablish()
+{
+  WiFi.begin(ssid, password);
+
+  while (WiFi.status() != WL_CONNECTED)
+  {
+    delay(1000);
+    Serial.println("Connecting to WiFi...");
+  }
+
+  Serial.println("Connected to WiFi!");
 }

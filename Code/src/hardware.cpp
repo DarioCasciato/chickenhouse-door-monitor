@@ -2,6 +2,7 @@
 // chickehouse-door-monitor | Hardware
 // =============================================================================
 
+#include <Arduino.h>
 #include "hardware.h"
 #include "general.h"
 
@@ -12,4 +13,9 @@ namespace Hardware
 {
     EdgeDetection switchMidway(&General::statusSwitchMidway);
     EdgeDetection switchEnd(&General::statusSwitchEnd);
+
+    bool getPort(Port port)
+    {
+        return digitalRead((uint8_t)port);
+    }
 } // namespace Hardware
