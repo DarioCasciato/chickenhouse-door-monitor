@@ -11,6 +11,8 @@ namespace General
 {
     extern uint8_t statusSwitchMidway;
     extern uint8_t statusSwitchEnd;
+
+    void WiFiEstablish();
 } // namespace General
 
 

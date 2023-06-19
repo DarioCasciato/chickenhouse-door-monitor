@@ -6,13 +6,11 @@
 #include <ESP8266HTTPClient.h>
 #include "state.h"
 #include "hardware.h"
+#include "general.h"
 #include "configurations.h"
 #include "Timer.h"
 
 Timer counter;
-
-HTTPClient http;
-WiFiClient client;
 
 void sendNotification(const char* Event);
 bool flag_midwayTriggered = false;
@@ -130,6 +128,11 @@ namespace State
 
 void sendNotification(const char* Event)
 {
+    HTTPClient http;
+    WiFiClient client;
+
+    General::WiFiEstablish();
+
     // Send the HTTP POST request
     http.begin(client, Event);
     int httpResponseCode = http.POST("");
