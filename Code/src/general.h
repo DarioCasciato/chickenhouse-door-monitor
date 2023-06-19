@@ -9,9 +9,6 @@
 
 namespace General
 {
-    //Temporary, current solution should work without doorSignal
-    //uint8_t statusDoorSignal;
-
     extern uint8_t statusSwitchMidway;
     extern uint8_t statusSwitchEnd;
 } // namespace General

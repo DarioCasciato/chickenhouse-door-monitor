@@ -45,9 +45,6 @@ void loop()
 
 void refreshData()
 {
-  //Temporary, current solution should work without doorSignal
-  //General::statusDoorSignal = digitalRead(PIN_DOORSIGNAL);
-
   General::statusSwitchMidway = digitalRead(PIN_SWITCH_MIDWAY);
   General::statusSwitchEnd = digitalRead(PIN_SWITCH_END);
 
