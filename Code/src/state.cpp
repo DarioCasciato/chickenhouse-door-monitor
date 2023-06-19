@@ -14,9 +14,7 @@ Timer counter;
 HTTPClient http;
 WiFiClient client;
 
-void sendNotClosed();
-void sendNotOpened();
-
+void sendNotification(const char* Event);
 bool flag_midwayTriggered = false;
 
 //------------------------------------------------------------------------------
@@ -90,7 +88,7 @@ namespace State
                 state = States::st_closed;
                 Serial.println("OPENING FAILED");
                 //! SEND NOTIFICATION (NOT OPENED)
-                sendNotOpened();
+                sendNotification(request_notOpened);
             }
 
             flag_midwayTriggered = false;
@@ -122,7 +120,7 @@ namespace State
                 state = States::st_open;
                 Serial.println("CLOSING FAILED");
                 //! SEND NOTIFICATION (NOT CLOSED)
-                sendNotClosed();
+                sendNotification(request_notClosed);
             }
         }
     }
@@ -130,36 +128,20 @@ namespace State
 
 //------------------------------------------------------------------------------
 
-void sendNotClosed() {
-  // Send the HTTP POST request
-  http.begin(client, request_notClosed);
-  int httpResponseCode = http.POST("");
+void sendNotification(const char* Event)
+{
+    // Send the HTTP POST request
+    http.begin(client, Event);
+    int httpResponseCode = http.POST("");
 
-  // Check the response code
-  if (httpResponseCode == HTTP_CODE_OK) {
-    Serial.println("Notification sent: Not Closed!");
-  } else {
-    Serial.print("Error sending notification. Response code: ");
-    Serial.println(httpResponseCode);
-  }
+    // Check the response code
+    if (httpResponseCode == HTTP_CODE_OK) {
+        Serial.println("Notification sent: Not Closed!");
+    } else {
+        Serial.print("Error sending notification. Response code: ");
+        Serial.println(httpResponseCode);
+    }
 
-  // Close the connection
-  http.end();
-}
-
-void sendNotOpened() {
-  // Send the HTTP POST request
-  http.begin(client, request_notOpened);
-  int httpResponseCode = http.POST("");
-
-  // Check the response code
-  if (httpResponseCode == HTTP_CODE_OK) {
-    Serial.println("Notification sent: Not Opened!");
-  } else {
-    Serial.print("Error sending notification. Response code: ");
-    Serial.println(httpResponseCode);
-  }
-
-  // Close the connection
-  http.end();
+    // Close the connection
+    http.end();
 }
