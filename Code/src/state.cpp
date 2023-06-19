@@ -136,7 +136,8 @@ void sendNotification(const char* Event)
 
     // Check the response code
     if (httpResponseCode == HTTP_CODE_OK) {
-        Serial.println("Notification sent: Not Closed!");
+        Serial.print("Notification sent: ");
+        Serial.println(Event);
     } else {
         Serial.print("Error sending notification. Response code: ");
         Serial.println(httpResponseCode);
