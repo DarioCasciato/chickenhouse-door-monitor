@@ -140,7 +140,7 @@ void sendNotification(const char* Event)
 
     General::WiFiEstablish();
 
-    // Send the HTTP POST request
+    // Send the HTTP request
     http.begin(client, Event);
     int httpResponseCode = http.POST("");
 
