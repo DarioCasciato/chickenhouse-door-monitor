@@ -18,4 +18,6 @@ extern const char* event_name;
 extern const char* request_notClosed;
 extern const char* request_notOpened;
 
+// configurations.cpp is secret
+
 #endif // _CHICKENHOUSE_DOOR_MONITOR_CONFIGURATIONS_
