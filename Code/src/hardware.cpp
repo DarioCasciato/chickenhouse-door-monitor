@@ -11,6 +11,7 @@ uint8_t General::statusSwitchEnd = 0;
 
 namespace Hardware
 {
+    // Edge detection for pin states
     EdgeDetection switchMidway(&General::statusSwitchMidway);
     EdgeDetection switchEnd(&General::statusSwitchEnd);
 

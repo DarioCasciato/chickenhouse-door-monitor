@@ -18,16 +18,16 @@ void refreshData();
 void setup()
 {
   Serial.begin(115200);
-  ESP.wdtEnable(WDTO_1S);
+  ESP.wdtEnable(WDTO_1S); // Enable watchdog
 
-  General::WiFiEstablish();
+  General::WiFiEstablish(); // create Wi-Fi connection
 }
 
 void loop()
 {
   for (;;)
   {
-    refreshData();
+    refreshData();  // refresh port values
 
     State::stateDriver();
 

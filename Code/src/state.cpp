@@ -31,7 +31,7 @@ namespace State
         case State::st_open: stateOpen(); break;
         case State::st_closing: stateClosing(); break;
 
-        default:
+        default:    // catch invalid state (implement safety backup)
         goto exception;
             break;
         }
@@ -42,6 +42,7 @@ namespace State
             for(;;) {}
     }
 
+    // decide in which state the door starts
     void stateStart()
     {
         if(Hardware::switchEnd.getActState())
@@ -58,6 +59,7 @@ namespace State
 
     void stateClosed()
     {
+        // Magnet distances from end switch
         if(Hardware::switchEnd.getEdgeNeg())
         {
             state = States::st_opening;
@@ -74,6 +76,7 @@ namespace State
             Serial.println("midway Sensor triggered");
         }
 
+        // opening time elapsed
         if(counter.elapsed(TIME_OPENING * 1000))
         {
             if(flag_midwayTriggered && !Hardware::switchEnd.getActState())
@@ -96,6 +99,7 @@ namespace State
 
     void stateOpen()
     {
+        // Magnet triggers midway switch
         if(Hardware::switchMidway.getEdgePos())
         {
             state = States::st_closing;
@@ -106,8 +110,10 @@ namespace State
 
     void stateClosing()
     {
+        // closing time elapsed
         if(counter.elapsed(TIME_CLOSING * 1000))
         {
+            // detect if end switch is active
             if(Hardware::switchEnd.getActState())
             {
                 state = States::st_closed;
@@ -126,6 +132,7 @@ namespace State
 
 //------------------------------------------------------------------------------
 
+// call webhook for IFTTT. push notification on phone is sent through IFTTT app.
 void sendNotification(const char* Event)
 {
     HTTPClient http;
@@ -138,10 +145,12 @@ void sendNotification(const char* Event)
     int httpResponseCode = http.POST("");
 
     // Check the response code
-    if (httpResponseCode == HTTP_CODE_OK) {
+    if (httpResponseCode == HTTP_CODE_OK)
+    {
         Serial.print("Notification sent: ");
         Serial.println(Event);
-    } else {
+    } else
+    {
         Serial.print("Error sending notification. Response code: ");
         Serial.println(httpResponseCode);
     }

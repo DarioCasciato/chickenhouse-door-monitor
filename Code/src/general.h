@@ -9,6 +9,7 @@
 
 namespace General
 {
+    // Pin value buffer
     extern uint8_t statusSwitchMidway;
     extern uint8_t statusSwitchEnd;
 

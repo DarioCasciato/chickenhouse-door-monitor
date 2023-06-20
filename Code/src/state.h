@@ -11,7 +11,7 @@
 
 namespace State
 {
-    enum States
+    enum States : uint8_t
     {
         st_start,
         st_closed,

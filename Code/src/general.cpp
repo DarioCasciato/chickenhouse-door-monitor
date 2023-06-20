@@ -9,7 +9,7 @@
 #include "configurations.h"
 
 void General::WiFiEstablish()
-{
+{ //create Wi-Fi connection
   WiFi.begin(ssid, password);
 
   while (WiFi.status() != WL_CONNECTED)
