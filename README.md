@@ -1,3 +1,6 @@
+> :warning: **Disclaimer**: This repository is now deprecated and will no longer be maintained or supported. It may not function as originally intended and is not recommended for use in new projects.
+
+
 # Chickendoor Monitoring System
 
 ## Overview
